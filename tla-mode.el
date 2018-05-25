@@ -67,6 +67,10 @@
      ( ,(regexp-opt tla-mode-types 'words) . font-lock-type-face)
      )))
 
+(defun repl-string (s)
+  (let ((ls (string-to-list s)))
+    (butlast (seq-mapcat (lambda (x) (list x '(Br . Bl)))
+			 ls ))))
 
 ;;;###autoload
 (define-derived-mode tla-mode prog-mode "TLA"
@@ -87,7 +91,7 @@
                 ("~" . ?¬)
                 ("\\lnot" . ?¬)       ("\\neg" . ?¬)
                 ("<=>" . ?≡)          ("\equiv" . ?≡)
-                ("==" . ?≜)
+                ("==" . ,(repl-string "≜ "))
                 ("\\in" . ?∈)
                 ("\\notin" . ?∉)
                 ("#" . ?≠)            ("/=" . ?≠)
@@ -125,8 +129,8 @@
                 ("|=" . ?⊨)
                 ;;"=|" no good rendering
                 ("\\sim" . ?∼)
-                ("->" . ?⭢)
-                ("<-" . ?⭠)
+                ("->" . ?→)
+                ("<-" . ?←)
                 ("\\simeq" . ?≃)
                 ("\\cap" . ?∩)          ("\\intersect" . ?∩)
                 ("\\cup" . ?∪)          ("\\union" . ?∪)
@@ -144,8 +148,13 @@
                 ;;
                 ;;
                 ;;
-                ("\\E" . ?∃)
-                ("\\A" . ?∀)
+                ("(\\E" . ,(repl-string " (∃"))
+		("\\E" . ,(repl-string " ∃"))
+                ;; ("(\\A" . (?  (Br . Bl) ?( (Br . Bl) ?∀))
+                ("(\\A" . ,(repl-string " (∀"))
+                ("\\A" . ,(repl-string " ∀"))
+		;; ("\\A" . (?a (Br . Bl) ?b (Br . Bl) ?c))
+
                 ;;("\\EE" . ?∃)
                 ;;("\\A" . ?∀)
                 ("LAMBDA" . ?λ)
