@@ -17,11 +17,11 @@
 (defvar tla-mode-constants
     '("FALSE"
       "TRUE"))
-  
+
 (defvar tla-mode-keywords
   '("MODULE" "EXTENDS" "INSTANCE" "WITH"
     "LOCAL"
-    "CONSTANT" "CONSTANTS" "VARIABLE" "VARIABLES" 
+    "CONSTANT" "CONSTANTS" "VARIABLE" "VARIABLES"
     "IF" "THEN" "ELSE"
     "CHOOSE" "CASE" "OTHER"
     "LET"
@@ -49,7 +49,7 @@
     (modify-syntax-entry ?\( ". 1" st)
     (modify-syntax-entry ?* ". 23" st)
     (modify-syntax-entry ?\) ". 4" st)
-    
+
     ; Return st
     st
     )
@@ -72,20 +72,20 @@
 (define-derived-mode tla-mode prog-mode "TLA"
   "TLA mode is a major mode for writing TLA+ specifications"
   :syntax-table tla-mode-syntax-table
-  
+
   (setq-local font-lock-defaults tla-font-lock-defaults)
-  
+
   ;; for writing comments (not fontifying them)
   (setq-local comment-start "(*")
   (setq-local comment-end "*)")
 
   (setq-local prettify-symbols-alist
-              '(
+              `(
                 ("/\\" . ?∧)          ("\\land" . ?∧)
                 ("\\/" . ?∨)          ("\\lor" . ?∨)
                 ("=>" . ?⇒)
                 ("~" . ?¬)
-                ("\\lnot" . ?¬)       ("\\neg" . ?¬) 
+                ("\\lnot" . ?¬)       ("\\neg" . ?¬)
                 ("<=>" . ?≡)          ("\equiv" . ?≡)
                 ("==" . ?≜)
                 ("\\in" . ?∈)
@@ -112,7 +112,7 @@
                 ("\\cdot" . ?⋅)
                 ("\\subset" . ?⊂)
                 ("\\supset" . ?⊃)
-                ("\\o" . ?∘) ("\\circ" . ?∘) 
+                ("\\o" . ?∘) ("\\circ" . ?∘)
                 ("\\sqsubset" . ?⊏)
                 ("\\sqsupset" . ?⊐)
                 ("\\bullet" . ?•)
@@ -152,7 +152,7 @@
                 ))
 
 
-  (prettify-symbols-mode)  
+  (prettify-symbols-mode)
   )
 
 ;;;###autoload
